@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="KNS Kemang Coliving - interactive owner and investment feasibility presentation." name="description"/>
+<title>KNS Kemang Coliving</title>
+<link href="styles.css" rel="stylesheet"/>
+<style>
+/* Final presentation refinements */
+html{scroll-padding-top:120px}
+body{overflow-x:hidden}
+.nav{z-index:1000}
+.nav-links a{font-size:18px}
+.nav-pill{font-size:16px}
+main{padding-top:0}
+.hero{padding-top:105px;box-sizing:border-box}
+.hero-content{padding-top:18px}
+.section[id]{scroll-margin-top:120px}
+.gallery-selector{display:grid!important;grid-template-columns:minmax(150px,190px) minmax(0,1fr);grid-template-rows:auto auto;gap:0!important;align-items:stretch;overflow:hidden}
+.gallery-selector .room-tabs{grid-column:1;grid-row:1 / span 2}
+.gallery-selector .gallery-visual{grid-column:2;grid-row:1;height:570px;min-height:570px;position:relative;background:#e9eee8;overflow:hidden}
+.gallery-selector .gallery-visual img{width:100%;height:100%;object-fit:contain;display:block;background:#e9eee8}
+.gallery-selector .gallery-detail{grid-column:2;grid-row:2;padding:28px 42px 32px;display:grid;grid-template-columns:1fr auto;column-gap:28px;align-items:start}
+.gallery-selector .gallery-detail .room-number,.gallery-selector .gallery-detail h3,.gallery-selector .gallery-detail p{grid-column:1}
+.gallery-selector .gallery-detail dl{grid-column:2;grid-row:1 / span 3;min-width:300px}
+.gallery-selector .gallery-detail .gallery-dots{grid-column:1 / -1}
+.gallery-arrow{position:absolute;top:50%;transform:translateY(-50%);width:58px;height:58px;border-radius:50%;border:1px solid rgba(255,255,255,.7);background:rgba(20,30,27,.68);color:#fff;font-size:38px;line-height:1;display:grid;place-items:center;cursor:pointer;z-index:3}
+.gallery-prev{left:28px}.gallery-next{right:28px}
+.gallery-counter{position:absolute;right:28px;bottom:24px;background:rgba(20,30,27,.68);color:#fff;padding:9px 13px;border-radius:20px;font-size:13px;z-index:3}
+.gallery-caption{position:absolute;left:28px;bottom:25px;color:#fff;font-size:14px;letter-spacing:.08em;text-transform:uppercase;text-shadow:0 1px 5px rgba(0,0,0,.5);z-index:3}
+.gallery-dots{display:flex;gap:8px;margin-top:16px}
+.gallery-dot{width:9px;height:9px;border-radius:50%;border:0;background:#ccd3cd;padding:0;cursor:pointer}
+.gallery-dot.active{width:34px;border-radius:8px;background:#28745f}
+.cost-compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.cost-compare-card{background:#fff;border-radius:28px;padding:30px;box-shadow:0 10px 30px rgba(20,35,30,.06)}
+.cost-compare-card.proposed{background:#f4f6e9}
+.cost-card-head{display:flex;justify-content:space-between;gap:20px;align-items:center;text-transform:uppercase;letter-spacing:.12em;font-size:12px;color:#28745f}
+.cost-card-head b{font-size:13px;color:#17221f}
+.cost-total{display:block;font-family:Georgia,serif;font-size:58px;line-height:1;margin:22px 0 8px;color:#173b31}
+.cost-compare-card p{margin:0 0 24px;color:#68766f}
+.cost-bars{display:grid;gap:14px}.cost-bars>div{position:relative;display:grid;grid-template-columns:1fr auto;gap:6px;font-size:13px}.cost-bars i{grid-column:1 / -1;height:8px;border-radius:8px;background:linear-gradient(90deg,#28745f var(--pct),#dfe5df var(--pct));display:block}
+.cost-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:18px}.cost-summary>div{background:#173f35;color:#fff;border-radius:22px;padding:24px}.cost-summary span{display:block;font-size:11px;letter-spacing:.12em;opacity:.75}.cost-summary strong{display:block;font-family:Georgia,serif;font-size:32px;margin-top:8px}
+.lowcase-compare{margin-top:22px;background:#fff;border-radius:28px;padding:30px}.lowcase-head{display:flex;justify-content:space-between;gap:30px;align-items:end;margin-bottom:20px}.lowcase-head span{font-size:11px;letter-spacing:.13em;color:#28745f}.lowcase-head h3{font-size:27px;margin:7px 0 0}.lowcase-head p{max-width:340px;color:#78837e;font-size:13px}
+.scenario-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}.scenario-card{background:#f2f4ef;border-radius:18px;padding:18px}.scenario-card.featured{background:#e5f0d0}.scenario-card>b{display:block;font-size:14px;margin-bottom:12px}.scenario-card div{display:flex;justify-content:space-between;border-top:1px solid #d9dfd9;padding:9px 0}.scenario-card strong{font-size:14px}.scenario-card small{display:block;color:#7c8781;font-size:10px;margin-top:7px;line-height:1.35}.five-year-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}.five-year-grid>div{border:1px solid #dce3dd;border-radius:16px;padding:17px}.five-year-grid span{display:block;font-size:10px;letter-spacing:.1em;color:#68766f;margin-bottom:8px}.five-year-grid b{display:block;font-size:14px;margin-top:5px}
+@media(max-width:900px){.nav-links a{font-size:15px}.gallery-selector{grid-template-columns:1fr}.gallery-selector .room-tabs{grid-column:1;grid-row:auto;display:flex;overflow:auto}.gallery-selector .gallery-visual{grid-column:1;grid-row:auto;height:480px;min-height:480px}.gallery-selector .gallery-detail{grid-column:1;grid-row:auto;display:block;padding:24px}.gallery-selector .gallery-detail dl{min-width:0}.cost-compare-grid,.cost-summary,.scenario-grid,.five-year-grid{grid-template-columns:1fr}.lowcase-head{display:block}}
+@media(max-width:640px){.hero{padding-top:90px}.nav-links{display:none}.gallery-selector .gallery-visual{height:360px;min-height:360px}.gallery-arrow{width:48px;height:48px;font-size:30px}.gallery-prev{left:14px}.gallery-next{right:14px}.gallery-caption{left:16px;bottom:18px}.gallery-counter{right:16px;bottom:18px}.cost-total{font-size:44px}}
+
+/* ROI + opportunity cost comparison */
+.roi-compare{margin-top:22px;background:#173f35;color:#fff;border-radius:28px;padding:34px}
+.roi-head{display:flex;justify-content:space-between;gap:28px;align-items:end;margin-bottom:24px}
+.roi-head span,.opportunity-head span{font-size:11px;letter-spacing:.13em;color:#d9e7c8}
+.roi-head h3,.opportunity-head h3{font-family:Georgia,serif;font-size:31px;line-height:1.05;margin:7px 0 0;color:#fff}
+.roi-head p{max-width:390px;margin:0;color:rgba(255,255,255,.72);font-size:13px;line-height:1.55}
+.roi-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.roi-card{background:#f7f8f3;color:#17221f;border-radius:22px;padding:24px}
+.roi-card.proposed{background:#e5f0d0}
+.roi-card-head{display:flex;justify-content:space-between;gap:16px;align-items:center;text-transform:uppercase;letter-spacing:.1em;font-size:11px;color:#28745f}
+.roi-card-head b{font-size:12px;color:#17221f}
+.roi-value{display:block;font-family:Georgia,serif;font-size:52px;line-height:1;margin:16px 0 8px;color:#173f35}
+.roi-card p{margin:0;color:#68766f;font-size:13px;line-height:1.5}
+.roi-metrics{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}
+.roi-metrics div{border-top:1px solid #dce3dd;padding-top:11px}
+.roi-metrics span{display:block;font-size:10px;letter-spacing:.09em;color:#78837e}
+.roi-metrics strong{display:block;margin-top:5px;font-size:15px}
+.roi-delta{margin-top:16px;padding:16px 18px;border-radius:17px;background:rgba(255,255,255,.11);display:flex;justify-content:space-between;gap:16px;align-items:center}
+.roi-delta span{font-size:11px;letter-spacing:.1em;color:rgba(255,255,255,.72)}
+.roi-delta strong{font-family:Georgia,serif;font-size:25px;color:#f3cf7a}
+.opportunity{margin-top:18px;background:#fff;border-radius:28px;padding:30px}
+.opportunity-head{display:flex;justify-content:space-between;gap:28px;align-items:end;margin-bottom:22px}
+.opportunity-head span{color:#28745f}
+.opportunity-head h3{color:#173f35}
+.opportunity-head p{max-width:430px;margin:0;color:#78837e;font-size:13px;line-height:1.55}
+.timeline{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:18px}
+.timeline-card{border-radius:18px;padding:20px;background:#f2f4ef}
+.timeline-card.proposed{background:#f4f6e9}
+.timeline-card span{display:block;font-size:10px;letter-spacing:.1em;color:#28745f}
+.timeline-card strong{display:block;font-family:Georgia,serif;font-size:28px;margin:8px 0 5px;color:#173f35}
+.timeline-card p{margin:0;color:#68766f;font-size:12px}
+.opportunity-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.opportunity-grid>div{border:1px solid #dce3dd;border-radius:17px;padding:18px}
+.opportunity-grid span{display:block;font-size:10px;letter-spacing:.09em;color:#68766f}
+.opportunity-grid strong{display:block;font-family:Georgia,serif;font-size:25px;margin-top:7px;color:#173f35}
+.opportunity-grid small{display:block;margin-top:6px;color:#7c8781;line-height:1.4}
+.opportunity-note{margin:17px 0 0;color:#78837e;font-size:11px;line-height:1.5}
+@media(max-width:900px){
+  .roi-head,.opportunity-head{display:block}
+  .roi-head p,.opportunity-head p{max-width:none;margin-top:12px}
+  .roi-grid,.timeline,.opportunity-grid{grid-template-columns:1fr}
+}
+
+</style></head>
+<body>
+<header class="nav" id="nav">
+<a aria-label="KNS Kemang Coliving home" class="brand" href="#top">
+<span class="brand-kns">KNS</span>
+<span class="brand-project">KEMANG COLIVING</span>
+</a>
+<nav aria-label="Primary navigation" class="nav-links">
+<a href="#project">Project</a>
+<a href="#design">Design</a>
+<a href="#rooms">Rooms</a>
+<a href="#financials">Financials</a>
+<a href="#budget">Budget</a>
+<a href="#documents">Documents</a>
+</nav>
+<a class="nav-pill" href="#walkthrough">3D walkthrough</a>
+</header>
+<main id="top">
+<section aria-label="KNS Kemang Coliving hero" class="hero">
+<video autoplay="" class="hero-video" id="heroVideo" loop="" muted="" playsinline="" poster="assets/poster.jpg" preload="metadata">
+<source src="assets/kemang-coliving-concept-film.mp4" type="video/mp4"/>
+</video>
+<div class="hero-scrim"></div>
+<div class="hero-content shell">
+<div class="eyebrow hero-eyebrow"><span></span> Kemang, South Jakarta · Concept &amp; feasibility stage</div>
+<h1>KNS Kemang<br/><em>Coliving</em></h1>
+<p class="hero-copy">A 40-key urban coliving concept combining efficient loft-style rooms, private balconies, shared amenities and a location-led rental strategy.</p>
+<div class="hero-actions">
+<a class="button primary" href="#project">Explore the project <span>↘</span></a>
+<a class="button glass" href="#walkthrough">Watch the 3D walkthrough</a>
+</div>
+<div class="hero-kpis">
+<div><strong>40</strong><span>keys</span></div>
+<div><strong>1,093 m²</strong><span>building area</span></div>
+<div><strong>405.5 m²</strong><span>site area</span></div>
+<div><strong>5</strong><span>floors</span></div>
+</div>
+</div>
+<div class="scroll-cue">SCROLL <span>↓</span></div>
+</section>
+<section class="section project-intro" id="project">
+<div class="shell grid-12">
+<div class="section-kicker col-3">01 · PROJECT</div>
+<div class="col-9 intro-copy">
+<h2>A compact site,<br/><em>planned vertically.</em></h2>
+<p>KNS Kemang Coliving is being developed around the confirmed <strong>40-room option</strong>. The architecture is the controlling reference for room mix and room naming. Interior imagery remains conceptual while furniture, finishes and detailed FF&amp;E are still being developed.</p>
+</div>
+</div>
+<div class="shell stat-grid reveal">
+<article class="stat-card lime">
+<span class="stat-index">01</span><strong>31</strong><h3>Standard rooms</h3><p>16.5 m² · base room type</p>
+</article>
+<article class="stat-card sky">
+<span class="stat-index">02</span><strong>3</strong><h3>Deluxe rooms</h3><p>20.4 m² · wider layout</p>
+</article>
+<article class="stat-card peach">
+<span class="stat-index">03</span><strong>4</strong><h3>Premium 1</h3><p>22.9 m² · top-floor concept</p>
+</article>
+<article class="stat-card lilac">
+<span class="stat-index">04</span><strong>2</strong><h3>Premium 2</h3><p>26.5 m² · largest layout</p>
+</article>
+</div>
+<div class="shell development-logic reveal">
+<div>
+<div class="eyebrow dark"><span></span> WORKING DEVELOPMENT LOGIC</div>
+<h3>Ground-floor utility. Upper-floor efficiency. A premium fifth-floor finish.</h3>
+</div>
+<div class="logic-list">
+<div><b>GF</b><span>3 Standard rooms, front office, lobby, housekeeping, toilets and multipurpose hall / ballroom.</span></div>
+<div><b>2F</b><span>9 Standard + 1 Deluxe + communal area.</span></div>
+<div><b>3F</b><span>10 Standard + 1 Deluxe.</span></div>
+<div><b>4F</b><span>9 Standard + 1 Deluxe + communal area.</span></div>
+<div><b>5F</b><span>4 Premium 1 + 2 Premium 2 + laundry and rooftop functions.</span></div>
+</div>
+</div>
+</section>
+<section class="section architecture" id="design">
+<div class="shell design-header grid-12">
+<div class="section-kicker col-3">02 · ARCHITECTURE</div>
+<div class="col-9">
+<h2>One building,<br/><em>five distinct layers.</em></h2>
+<p class="lead">The latest architectural documents remain the baseline for the floor program. Use the selector to move through the building.</p>
+</div>
+</div>
+<div class="shell floor-explorer reveal">
+<div aria-label="Floor selector" class="floor-controls" role="tablist">
+<button class="floor-btn active" data-floor="1">GF <small>Facilities + rooms</small></button>
+<button class="floor-btn" data-floor="2">2F <small>Standard + Deluxe</small></button>
+<button class="floor-btn" data-floor="3">3F <small>Standard + Deluxe</small></button>
+<button class="floor-btn" data-floor="4">4F <small>Standard + Deluxe</small></button>
+<button class="floor-btn" data-floor="5">5F <small>Premium + rooftop</small></button>
+</div>
+<div class="floor-stage">
+<img alt="Ground floor architectural plan" id="floorImage" src="assets/floor-1.webp"/>
+<div class="floor-caption">
+<div><span id="floorLabel">GROUND FLOOR</span><strong id="floorTitle">Facilities + 3 Standard rooms</strong></div>
+<p id="floorText">Front office, lobby, housekeeping, public toilets, 3 Standard rooms and the multipurpose hall / ballroom.</p>
+</div>
+</div>
+</div>
+<div class="shell concept-note reveal">
+<span>DESIGN STATUS</span>
+<p>The architectural layouts are the working baseline. Rendered furniture, styling and finishes shown throughout this site are <strong>conceptual</strong> and may change before final interior design and procurement.</p>
+</div>
+</section>
+<section class="section rooms" id="rooms">
+<div class="shell grid-12 room-head">
+<div class="section-kicker col-3">03 · ROOM COLLECTION</div>
+<div class="col-9"><h2>Designed around<br/><em>space efficiency.</em></h2></div>
+</div>
+<div class="shell room-selector gallery-selector reveal">
+<div aria-label="Room and facilities selector" class="room-tabs" role="tablist">
+<button class="room-tab active" data-gallery="standard">Standard <span>31 keys</span></button>
+<button class="room-tab" data-gallery="deluxe">Deluxe <span>3 keys</span></button>
+<button class="room-tab" data-gallery="premium1">Premium 1 <span>4 keys</span></button>
+<button class="room-tab" data-gallery="premium2">Premium 2 <span>2 keys</span></button>
+<button class="room-tab" data-gallery="facilities">Facilities <span>4 spaces</span></button>
+</div>
+<div class="room-visual gallery-visual">
+<img alt="Conceptual Standard room entryway / passage" id="roomImage" src="assets/rooms/standard/Standard%20passage.jpg"/>
+<div class="concept-chip">CONCEPTUAL INTERIOR</div>
+<button aria-label="Previous image" class="gallery-arrow gallery-prev" type="button">‹</button>
+<button aria-label="Next image" class="gallery-arrow gallery-next" type="button">›</button>
+<div class="gallery-counter" id="galleryCounter">1 / 4</div>
+<div class="gallery-caption" id="galleryCaption">ENTRYWAY / PASSAGE</div>
+</div>
+<div class="room-detail gallery-detail">
+<div class="room-number" id="roomArea">16.5 <span>m²</span></div>
+<h3 id="roomName">Standard Room</h3>
+<p id="roomDescription">Compact loft-style planning with a work zone, sleeping area, private bathroom and balcony concept.</p>
+<dl>
+<div><dt>Monthly base rate</dt><dd id="roomMonthly">Rp4.60m</dd></div>
+<div><dt>Daily base rate</dt><dd id="roomDaily">Rp460k</dd></div>
+<div><dt>Count</dt><dd id="roomCount">31 rooms</dd></div>
+</dl>
+<div aria-label="Gallery image selector" class="gallery-dots" id="galleryDots"></div>
+</div>
+</div>
+</section>
+
+<section class="section walkthrough" id="walkthrough">
+<div class="shell walkthrough-head grid-12">
+<div class="section-kicker col-3">04 · 3D WALKTHROUGH</div>
+<div class="col-9"><h2>The current architectural<br/><em>walkthrough.</em></h2><p class="lead">A rough spatial preview of the proposed exterior and internal circulation. It is not a final furniture or finishes specification.</p></div>
+</div>
+<div class="shell film-frame reveal">
+<video controls="" playsinline="" poster="assets/poster.jpg" preload="metadata">
+<source src="assets/walkthrough.mp4" type="video/mp4"/>
+</video>
+<div class="film-meta"><span>02:53 concept walkthrough</span><span>Architecture / internal circulation / exterior</span></div>
+</div>
+</section>
+<section class="section furnishing-options" id="furnishing">
+<div class="shell grid-12 furnishing-head">
+<div class="section-kicker col-3">05 · FURNISHING OPTIONS</div>
+<div class="col-9">
+<h2>Two furnishing directions,<br/><em>one architectural shell.</em></h2>
+<p class="lead">With the room layout established, these two concepts compare alternative furnishing, material and styling directions for KNS Kemang. Both remain conceptual and can be refined before procurement.</p>
+</div>
+</div>
+<div class="shell furnishing-grid reveal">
+<article class="furnishing-card">
+<div class="furnishing-video">
+<video controls="" playsinline="" poster="assets/furnishing/urban-minimalist-poster.jpg" preload="metadata">
+<source src="assets/furnishing/urban-minimalist.mp4" type="video/mp4"/>
+</video>
+<span class="furnishing-chip">OPTION 01</span>
+</div>
+<div class="furnishing-copy">
+<div><span>FURNISHING DIRECTION</span><h3>Urban Minimalist</h3></div>
+<p>Darker and more contemporary, combining warm walnut joinery with stone-grey finishes, black accents and a compact urban character.</p>
+<div class="furnishing-tags"><span>Walnut</span><span>Stone grey</span><span>Black accents</span></div>
+</div>
+</article>
+<article class="furnishing-card">
+<div class="furnishing-video">
+<video controls="" playsinline="" poster="assets/furnishing/warm-minimalist-poster.jpg" preload="metadata">
+<source src="assets/furnishing/warm-minimalist.mp4" type="video/mp4"/>
+</video>
+<span class="furnishing-chip">OPTION 02</span>
+</div>
+<div class="furnishing-copy">
+<div><span>FURNISHING DIRECTION</span><h3>Warm Minimalist</h3></div>
+<p>Brighter and softer, using light timber, warm neutral finishes and a relaxed residential palette to make the compact room feel more open.</p>
+<div class="furnishing-tags"><span>Light timber</span><span>Warm neutrals</span><span>Soft residential</span></div>
+</div>
+</article>
+</div>
+<p class="shell furnishing-note reveal">Concept videos are intended to compare atmosphere, finishes and furnishing direction only. Final FF&amp;E, materials and detailing remain subject to design development and procurement.</p>
+</section>
+<section class="section financials" id="financials">
+<div class="shell grid-12 financial-head">
+<div class="section-kicker col-3">06 · MEDIUM CASE</div>
+<div class="col-9">
+<h2>The investment case,<br/><em>made readable.</em></h2>
+<p class="lead">Working medium case using the higher Year-1 OPEX figure and a 50% OTA share of daily bookings. Returns shown below are based on equity cash flow after debt service.</p>
+</div>
+</div>
+<div class="shell finance-kpis reveal">
+<div class="finance-kpi"><span>Total investment</span><strong>Rp6.0bn</strong><small>project budget assumption</small></div>
+<div class="finance-kpi"><span>Year-1 revenue</span><strong>Rp2.47bn</strong><small>gross revenue</small></div>
+<div class="finance-kpi standout"><span>Equity IRR</span><strong>31.2%</strong><small>levered · 50% OTA working case</small></div>
+<div class="finance-kpi"><span>Payback</span><strong>3.07 yrs</strong><small>equity payback</small></div>
+<div class="finance-kpi"><span>Year-1 GOP</span><strong>Rp1.54bn</strong><small>after OPEX, before debt</small></div>
+<div class="finance-kpi"><span>Year-2 yield on cost</span><strong>24.9%</strong><small>GOP / total investment</small></div>
+</div>
+<div class="shell finance-grid reveal">
+<div class="chart-card">
+<div class="chart-title"><div><span>OWNER CASH FLOW</span><h3>10-year equity cash flow</h3></div><div class="chart-legend"><i></i> Rp bn</div></div>
+<canvas aria-label="10-year equity cash flow chart" id="cashflowChart"></canvas>
+</div>
+<div class="assumption-card">
+<span>CORE ASSUMPTIONS</span>
+<div class="assumption-row"><b>Monthly / daily stay mix</b><em>80% / 20%</em></div>
+<div class="assumption-row"><b>Monthly occupancy</b><em>85%</em></div>
+<div class="assumption-row"><b>Daily occupancy</b><em>65%</em></div>
+<div class="assumption-row"><b>Daily bookings via OTA</b><em>50%</em></div>
+<div class="assumption-row"><b>OTA cost</b><em>20%</em></div>
+<div class="assumption-row"><b>Debt</b><em>Rp2.4bn @ 8%</em></div>
+<div class="assumption-row"><b>Loan tenor</b><em>10 years</em></div>
+<div class="assumption-row"><b>Year-1 OPEX</b><em>Rp835.2m</em></div>
+<small class="assumption-note">Working case for owner review; not an offer or guarantee of return.</small>
+</div>
+</div>
+<div class="shell pricing-block reveal">
+<div class="pricing-head"><div><span>PRICING STRATEGY</span><h3>Model rents vs. current public asking rates</h3></div><p>Snapshot checked 22 Sep 2026.</p></div>
+<div class="pricing-table">
+<div class="pricing-row header"><span>Property / room</span><span>Monthly asking</span><span>Context</span></div>
+<div class="pricing-row kns"><span>KNS Standard</span><strong>Rp4.60m</strong><span>Model assumption</span></div>
+<div class="pricing-row"><span>Cove Kencana · Superior + balcony</span><strong>Rp4.00m</strong><span><a href="https://cove.id/properties/cove-kencana" rel="noopener" target="_blank">Public listing ↗</a></span></div>
+<div class="pricing-row"><span>Rukita 79A Kemang</span><strong>Rp3.57m–4.37m</strong><span><a href="https://www.rukita.co/en/kost/kemang-jakarta-selatan" rel="noopener" target="_blank">Public listing ↗</a></span></div>
+<div class="pricing-row"><span>Cove Indrakila · Premium</span><strong>Rp6.50m</strong><span><a href="https://cove.id/en/properties/cove-indrakila" rel="noopener" target="_blank">Public listing ↗</a></span></div>
+<div class="pricing-row"><span>Rukita Loft Kemang</span><strong>~Rp8.84m</strong><span><a href="https://www.rukita.co/en/kost/kemang-jakarta-selatan" rel="noopener" target="_blank">Public listing ↗</a></span></div>
+</div>
+<p class="source-note">Public asking rents are not directly comparable without room-size, included-utilities, contract-length and service adjustments. They are shown only as a current positioning reference.</p>
+</div>
+</section>
+<section class="section budget" id="budget">
+<div class="shell grid-12 budget-head">
+<div class="section-kicker col-3">07 · COST COMPARISON</div>
+<div class="col-9"><h2>Current layout vs.<br/><em>proposed redevelopment.</em></h2><p class="lead">Low-case feasibility comparison using the current and proposed cost estimates. The proposed case adds redevelopment, fire &amp; safety and genset requirements to the higher construction and interior scope.</p></div>
+</div>
+<div class="shell cost-compare-grid reveal">
+<article class="cost-compare-card current">
+<div class="cost-card-head"><span>CURRENT LAYOUT</span><b>40 ROOMS</b></div>
+<strong class="cost-total">Rp6.7bn</strong><p>Total capital investment including interiors.</p>
+<div class="cost-bars">
+<div><span>Construction</span><b>Rp3.2bn</b><i style="--pct:47.8%"></i></div>
+<div><span>Interior</span><b>Rp3.0bn</b><i style="--pct:44.8%"></i></div>
+<div><span>Other costs</span><b>Rp0.5bn</b><i style="--pct:7.4%"></i></div>
+</div>
+</article>
+<article class="cost-compare-card proposed">
+<div class="cost-card-head"><span>PROPOSED LAYOUT</span><b>60 ROOMS</b></div>
+<strong class="cost-total">Rp14.4bn</strong><p>Potential capital investment including interiors and additional requirements.</p>
+<div class="cost-bars">
+<div><span>Construction</span><b>Rp7.0bn</b><i style="--pct:48.6%"></i></div>
+<div><span>Interior</span><b>Rp4.5bn</b><i style="--pct:31.3%"></i></div>
+<div><span>Redevelopment</span><b>Rp1.0bn</b><i style="--pct:6.9%"></i></div>
+<div><span>Fire &amp; safety + genset</span><b>Rp1.4bn</b><i style="--pct:9.7%"></i></div>
+<div><span>Other costs</span><b>Rp0.5bn</b><i style="--pct:3.5%"></i></div>
+</div>
+</article>
+</div>
+<div class="shell cost-summary reveal">
+<div><span>ADDITIONAL CAPITAL REQUIRED</span><strong>+Rp7.7bn</strong></div>
+<div><span>INCREASE VS CURRENT</span><strong>+114.9%</strong></div>
+<div><span>ADDITIONAL ROOM CAPACITY</span><strong>+20 rooms</strong></div>
+</div>
+<div class="shell lowcase-compare reveal">
+<div class="lowcase-head"><div><span>LOW-CASE FEASIBILITY</span><h3>Operating comparison by occupancy</h3></div><p>Estimates supplied for owner review; not final operating projections.</p></div>
+<div class="scenario-grid">
+<div class="scenario-card"><b>70% occupancy</b><div><span>Current</span><strong>Rp592.8m</strong></div><div><span>Proposed</span><strong>Rp1.267bn</strong></div><small>Annual revenue after operating-cost model.</small></div>
+<div class="scenario-card"><b>80% occupancy</b><div><span>Current</span><strong>Rp796.8m</strong></div><div><span>Proposed</span><strong>Rp1.627bn</strong></div><small>Annual revenue after operating-cost model.</small></div>
+<div class="scenario-card featured"><b>85% occupancy</b><div><span>Current</span><strong>Rp898.8m</strong></div><div><span>Proposed</span><strong>Rp1.807bn</strong></div><small>Annual revenue after operating-cost model.</small></div>
+<div class="scenario-card"><b>90% occupancy</b><div><span>Current</span><strong>Rp1.001bn</strong></div><div><span>Proposed</span><strong>Rp1.987bn</strong></div><small>Annual revenue after operating-cost model.</small></div>
+<div class="scenario-card"><b>100% occupancy</b><div><span>Current</span><strong>Rp1.205bn</strong></div><div><span>Proposed</span><strong>Rp2.347bn</strong></div><small>Annual revenue after operating-cost model.</small></div>
+</div>
+<div class="five-year-grid">
+<div><span>85% · 5-YEAR CASH FLOW</span><b>Current Rp4.494bn</b><b>Proposed Rp9.036bn</b></div>
+<div><span>85% · OWNER SHARE @ 90%</span><b>Current Rp4.045bn</b><b>Proposed Rp8.132bn</b></div>
+<div><span>85% · ESTIMATED BEP</span><b>Current 99.4 months</b><b>Proposed 106.2 months</b></div>
+</div>
+<p class="source-note">Source comparison uses the supplied low-case estimates: Rp4.25m current rate, Rp5.00m proposed rate, 40 vs 60 rooms and the stated occupancy scenarios. Figures should be validated against the final operating model.</p>
+</div>
+</section>
+
+<section class="shell roi-compare reveal" aria-label="ROI comparison">
+  <div class="roi-head">
+    <div>
+      <span>RETURN COMPARISON</span>
+      <h3>Higher cash flow does not mean higher 5-year ROI.</h3>
+    </div>
+    <p>Using the supplied 85% occupancy case and the stated 90% owner-share figures, the proposed design generates more absolute cash flow but requires substantially more capital.</p>
+  </div>
+  <div class="roi-grid">
+    <article class="roi-card">
+      <div class="roi-card-head"><span>CURRENT DESIGN</span><b>40 ROOMS</b></div>
+      <strong class="roi-value">60.4%</strong>
+      <p>5-year owner cash flow as a percentage of total capital investment.</p>
+      <div class="roi-metrics">
+        <div><span>Capital investment</span><strong>Rp6.7bn</strong></div>
+        <div><span>5-year owner cash flow</span><strong>Rp4.045bn</strong></div>
+      </div>
+    </article>
+    <article class="roi-card proposed">
+      <div class="roi-card-head"><span>PROPOSED DESIGN</span><b>60 ROOMS</b></div>
+      <strong class="roi-value">56.5%</strong>
+      <p>5-year owner cash flow as a percentage of total capital investment.</p>
+      <div class="roi-metrics">
+        <div><span>Capital investment</span><strong>Rp14.4bn</strong></div>
+        <div><span>5-year owner cash flow</span><strong>Rp8.132bn</strong></div>
+      </div>
+    </article>
+  </div>
+  <div class="roi-delta">
+    <span>5-YEAR ROI DIFFERENCE</span>
+    <strong>Proposed: −3.9 percentage points</strong>
+  </div>
+</section>
+
+<section class="shell opportunity reveal" aria-label="Construction delay opportunity cost">
+  <div class="opportunity-head">
+    <div>
+      <span>OPPORTUNITY COST</span>
+      <h3>Time has a cost.</h3>
+    </div>
+    <p>The current design is expected to be ready in 2–3 months, while the proposed design requires at least 11 months. That creates an estimated 8–9 month revenue-generation delay.</p>
+  </div>
+  <div class="timeline">
+    <div class="timeline-card">
+      <span>CURRENT DESIGN</span>
+      <strong>2–3 months</strong>
+      <p>Indicative construction period before operations can begin.</p>
+    </div>
+    <div class="timeline-card proposed">
+      <span>PROPOSED DESIGN</span>
+      <strong>≥11 months</strong>
+      <p>Indicative minimum construction period before operations can begin.</p>
+    </div>
+  </div>
+  <div class="opportunity-grid">
+    <div>
+      <span>REVENUE DELAY</span>
+      <strong>8–9 months</strong>
+      <small>Additional construction time versus the current design.</small>
+    </div>
+    <div>
+      <span>MIN. OPPORTUNITY COST</span>
+      <strong>Rp539–607m</strong>
+      <small>Current-design owner cash flow foregone during the 8–9 month delay at 85% occupancy.</small>
+    </div>
+    <div>
+      <span>ADJUSTED PROPOSED ROI</span>
+      <strong>52.3–52.7%</strong>
+      <small>Indicative 5-year ROI after deducting the minimum opportunity cost from proposed owner cash flow.</small>
+    </div>
+  </div>
+  <p class="opportunity-note">Opportunity cost is shown separately from the base ROI so the underlying financial comparison remains transparent. It reflects foregone current-design owner cash flow only and does not include financing carry, construction-cost escalation, rent growth or other secondary effects.</p>
+</section>
+
+<section class="section concept-boards">
+<div class="shell grid-12">
+<div class="section-kicker col-3">08 · CONCEPT BOARDS</div>
+<div class="col-9"><h2>Visual direction,<br/><em>not final specification.</em></h2><p class="lead">The following AI-assisted presentation boards communicate the intended market positioning and atmosphere. They should not be treated as issued-for-construction details.</p></div>
+</div>
+<div class="board-rail">
+<img alt="KNS Kemang Coliving exterior identity concept board" src="assets/concept-board-1.webp"/>
+<img alt="Standard and Deluxe room concept board" src="assets/concept-board-2.webp"/>
+<img alt="Premium room concept board" src="assets/concept-board-3.webp"/>
+<img alt="Shared amenity concept board" src="assets/concept-board-4.webp"/>
+</div>
+</section>
+<section class="section documents" id="documents">
+<div class="shell grid-12 documents-head">
+<div class="section-kicker col-3">09 · PROJECT FILES</div>
+<div class="col-9"><h2>Source documents,<br/><em>one click away.</em></h2></div>
+</div>
+<div class="shell doc-grid reveal">
+<a class="doc-card" href="docs/floor-plans.pdf" target="_blank"><span>PDF</span><h3>Latest Floor Plans</h3><p>Architectural planning reference · 40-room option</p><b>Open ↗</b></a>
+<a class="doc-card" href="docs/current-rab.pdf" target="_blank"><span>PDF</span><h3>Current Vendor RAB</h3><p>NumStudio · bare-shell construction quotation</p><b>Open ↗</b></a>
+<a class="doc-card" href="docs/medium-case-feasibility.xlsx" target="_blank"><span>XLSX</span><h3>Medium Case Feasibility</h3><p>Source model · current working assumptions</p><b>Open ↗</b></a>
+<a class="doc-card" href="assets/walkthrough.mp4" target="_blank"><span>MP4</span><h3>3D Walkthrough</h3><p>Current concept animation · 02:53</p><b>Open ↗</b></a>
+</div>
+</section>
+</main>
+<footer class="footer">
+<div class="shell footer-grid">
+<div><strong>KNS</strong><span>KEMANG COLIVING</span></div>
+<p>Working owner / feasibility presentation. Concept imagery and financial outputs remain subject to design, tender, operating and market validation.</p>
+<a href="#top">Back to top ↑</a>
+</div>
+</footer>
+<script src="app.js"></script>
+</body>
+</html>

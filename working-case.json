@@ -1,0 +1,50 @@
+{
+  "project": {
+    "name": "KNS Kemang Coliving",
+    "location": "Kemang, South Jakarta",
+    "status": "Concept and feasibility stage",
+    "site_area_sqm": 405.5,
+    "building_area_sqm": 1093,
+    "floors": 5,
+    "rooms_total": 40
+  },
+  "room_mix": [
+    {"type":"Standard","count":31,"area_sqm":16.5,"monthly_rate_idr":4600000,"daily_rate_idr":460000},
+    {"type":"Deluxe","count":3,"area_sqm":20.4,"monthly_rate_idr":5000000,"daily_rate_idr":500000},
+    {"type":"Premium 1","count":4,"area_sqm":22.9,"monthly_rate_idr":5500000,"daily_rate_idr":550000},
+    {"type":"Premium 2","count":2,"area_sqm":26.5,"monthly_rate_idr":5900000,"daily_rate_idr":590000}
+  ],
+  "medium_case": {
+    "total_investment_idr": 6000000000,
+    "debt_idr": 2400000000,
+    "equity_idr": 3600000000,
+    "monthly_stay_mix": 0.8,
+    "daily_stay_mix": 0.2,
+    "monthly_occupancy": 0.85,
+    "daily_occupancy": 0.65,
+    "daily_bookings_via_ota": 0.5,
+    "ota_commission": 0.2,
+    "year_1_opex_idr": 835200000,
+    "year_1_gross_revenue_idr": 2470017000,
+    "year_1_ota_cost_idr": 90819300,
+    "year_1_net_revenue_idr": 2379197700,
+    "year_1_gop_idr": 1543997700,
+    "annual_debt_service_idr": 357670772.87,
+    "year_1_equity_cash_flow_idr": 1186326927.13,
+    "equity_irr_levered": 0.311989476,
+    "payback_years": 3.06824,
+    "year_2_yield_on_cost": 0.24908645
+  },
+  "development_cost": {
+    "bare_shell_contract_idr": 3000000000,
+    "pbg_idr": 200000000,
+    "other_owner_additions_fitout_equipment_contingency_balance_idr": 2800000000,
+    "current_rab_gross_idr": 3200000000
+  },
+  "notes": [
+    "Architectural documents control room naming and room mix.",
+    "Interior and amenity renders are conceptual and not final furniture or finish specifications.",
+    "The 50% OTA assumption applies to daily bookings, not to total project sales.",
+    "Financial website outputs are a working case derived from the source model with the approved website adjustments."
+  ]
+}
